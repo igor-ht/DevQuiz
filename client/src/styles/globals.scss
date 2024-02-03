@@ -1,7 +1,9 @@
 @use "./base/index" as *;
+@use "./abstracts/variables" as *;
 
 // html element
 :root {
+  background-color: $color-dark;
   overflow: hidden;
   overflow-y: auto;
 }

@@ -13,7 +13,7 @@ export default function Navbar() {
 
 	return (
 		<>
-			<nav style={{ right: menuOpen ? `0` : '-20em' }}>
+			<nav style={{ right: menuOpen ? `0` : '-25em' }}>
 				<ul>
 					<li>
 						<Link href={'/'}>Home</Link>
