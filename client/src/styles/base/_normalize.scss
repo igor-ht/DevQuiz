@@ -1,0 +1,111 @@
+select {
+  text-transform: none;
+}
+input[type="text"],
+input[type="search"],
+input[type="email"],
+input[type="password"],
+input[type="radio"] {
+  margin: 0;
+  padding: 0;
+  border-radius: 2px;
+  font-style: normal;
+  background-color: white;
+  outline: none;
+  font-weight: 400;
+  opacity: 1;
+  appearance: none;
+  -webkit-appearance: none;
+  line-height: normal;
+
+  &::placeholder {
+    -webkit-text-fill-color: gray;
+  }
+
+  &:focus,
+  &:focus-visible {
+    outline: none;
+    border: 0;
+    background-color: white;
+  }
+}
+input[type="search"] {
+  outline-offset: -2px;
+  appearance: textfield;
+  -webkit-appearance: textfield;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+
+  &::-webkit-search-cancel-button,
+  &::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+}
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  appearance: button;
+  cursor: pointer;
+
+  &::-moz-focus-inner {
+    padding: 0;
+    border-style: none;
+  }
+}
+
+button[disabled],
+input[disabled] {
+  cursor: default;
+}
+
+button,
+input {
+  &::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+}
+
+button {
+  appearance: button;
+  border-radius: 5px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-weight: 400;
+  font-style: normal;
+  user-select: none;
+  cursor: pointer;
+  line-height: normal;
+  text-transform: none;
+}
+
+img {
+  margin: 0;
+  border: 0;
+  user-select: none;
+  pointer-events: none;
+}
+
+label {
+  font-style: normal;
+  font-weight: 400;
+}
+
+a {
+  background: transparent;
+  text-decoration: none;
+  &:focus,
+  &:hover,
+  &:active {
+    outline: none;
+    text-decoration: none;
+  }
+}
+
+svg:not(:root) {
+  overflow: hidden;
+}

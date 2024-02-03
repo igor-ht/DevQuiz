@@ -1,0 +1,7 @@
+@charset "UTF-8";
+
+// variables, mixins, functions, and placeholders
+@forward "./abstracts/index";
+
+// specific styling for general components
+@forward "./components/index";
