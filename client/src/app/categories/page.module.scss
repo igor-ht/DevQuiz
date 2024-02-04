@@ -1,0 +1,84 @@
+@use "@/styles/main" as *;
+
+.categoriesContainer {
+  @include Size(90dvw, auto);
+  @include Grid(1fr, 1fr, 1rem);
+  background-color: #1e512875;
+  border-radius: 2px;
+
+  h1 {
+    @include Font($font-jakarta, 2.5rem, 700, $color-accent);
+    text-align: center;
+    letter-spacing: 1px;
+  }
+
+  .tagNames {
+    @include Flex(row, 1rem);
+    align-items: center;
+    justify-content: space-evenly;
+
+    span {
+      @include Font($font-primary, 1rem, 700, $color-dark);
+      text-align: center;
+      padding: 0.75rem;
+      border-radius: 2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background-color: $color-light;
+      text-wrap: nowrap;
+
+      &:hover {
+        background-color: $color-accent;
+        color: $color-dark;
+      }
+    }
+  }
+
+  .quizzes {
+    ul {
+      @include Flex(column);
+      align-items: center;
+      justify-content: space-evenly;
+      padding: 1rem;
+
+      li {
+        @include Size(20rem, 20rem);
+        @include Image(100%, 100%);
+        @include Flex(row, 0);
+        align-items: center;
+        justify-content: space-between;
+        background-color: #1e5128fa;
+        padding: 0.5rem 0.5rem 0.5rem 1rem;
+        border-radius: 2px;
+        border: 1px solid $color-light;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+          transform: scale(1.05);
+          box-shadow: 0 0 0.5rem 0.25rem $color-accent;
+        }
+
+        section {
+          flex: 1;
+          @include Font($font-primary, 1.25rem, 700, $color-light);
+        }
+
+        button {
+          @include Size(7rem, auto);
+          @include Font($font-primary, 1rem, 700, $color-dark);
+          padding: 0.5rem;
+          border-radius: 2px;
+          background-color: $color-light;
+          cursor: pointer;
+          transition: all 0.3s ease;
+
+          &:hover {
+            background-color: $color-accent;
+            color: $color-dark;
+          }
+        }
+      }
+    }
+  }
+}
