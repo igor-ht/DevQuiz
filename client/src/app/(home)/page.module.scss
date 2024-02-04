@@ -1,5 +1,36 @@
 @use "@/styles/main" as *;
 
-.main {
+.home {
   @include Grid(1fr, 1fr, 1rem);
+  justify-items: center;
+
+  section {
+    @include Flex(column, 0.5rem);
+    max-width: 70%;
+
+    h1 {
+      @include Font($font-secondary, 3.5rem, 700, $color-accent);
+    }
+    span {
+      p {
+        @include Font($font-jakarta, 1rem, 400, $color-primary);
+        letter-spacing: 1px;
+        text-shadow: 0px 0px 1px $color-light;
+
+        b {
+          color: $color-primary;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  @include MediaQuery($breakpoint-md) {
+    section {
+      max-width: 85%;
+      h1 {
+        font-size: 3rem;
+      }
+    }
+  }
 }
