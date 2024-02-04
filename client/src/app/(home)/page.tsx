@@ -8,7 +8,7 @@ export default function Home() {
 				<span>
 					<p>Have fun taking quick quizzes to check your general knowlodge.</p>
 					<p>
-						You can find many different ones about any subjects from <b>front-end</b>, <b>back-end</b> and more!
+						You can find many different ones about any subjects from <b>front-end</b> to <b>back-end</b> and more!
 					</p>
 				</span>
 			</section>

@@ -9,7 +9,12 @@
     max-width: 70%;
 
     h1 {
-      @include Font($font-secondary, 3.5rem, 700, $color-accent);
+      @include Font($font-secondary, 3.2rem, 700, $color-accent);
+      background: #048a0d;
+      background: linear-gradient(to left, #048a0d 0%, #00f708 0%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     span {
       p {
