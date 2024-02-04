@@ -2,14 +2,22 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Navbar() {
-	const [menuOpen, setMenuOpen] = useState(true);
+	const [menuOpen, setMenuOpen] = useState(false);
 
-	const handleMenu = () => {
-		setMenuOpen(!menuOpen);
-	};
+	useEffect(() => {
+		const handleClick = (e: MouseEvent) => {
+			const nav = document.querySelector('nav');
+			if (e.target instanceof HTMLButtonElement && !nav?.contains(e.target.parentElement)) return;
+			if (e.target instanceof HTMLLIElement && nav?.contains(e.target.parentElement)) return;
+			setMenuOpen(false);
+		};
+
+		document.addEventListener('click', handleClick);
+		return () => document.removeEventListener('click', handleClick);
+	}, []);
 
 	return (
 		<>
@@ -36,10 +44,11 @@ export default function Navbar() {
 			<span>
 				<button
 					type="button"
-					onClick={handleMenu}>
+					onClick={() => setMenuOpen(!menuOpen)}>
 					<Image
 						src={'/menu.svg'}
 						alt="menu"
+						style={{ transform: menuOpen ? 'rotateZ(90deg)' : 'none' }}
 						width={100}
 						height={100}
 						priority

@@ -1,9 +1,36 @@
 @use "./base/index" as *;
-@use "./abstracts/variables" as *;
+@use "./main" as *;
 
 // html element
 :root {
   background-color: $color-dark;
   overflow: hidden;
   overflow-y: auto;
+}
+
+body {
+  background-color: $color-dark;
+}
+
+.not-found-page,
+.error-page {
+  @include Flex(column, 1.5rem);
+  align-items: center;
+  justify-content: center;
+  color: $color-light;
+  font-size: 1rem;
+  font-family: $font-secondary;
+
+  h1 {
+    font-size: 2.2rem;
+  }
+  a {
+    color: $color-primary;
+    text-decoration: underline;
+  }
+  button {
+    @include Size(5rem, 2.5rem);
+    background-color: $color-primary;
+    border-radius: 2rem;
+  }
 }

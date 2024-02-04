@@ -7,6 +7,7 @@
 
   div {
     display: inline-block;
+    margin: 0 0 0 4rem;
     a {
       display: block;
       cursor: pointer;
@@ -58,6 +59,8 @@
 
   nav {
     margin-right: 7rem;
+    user-select: none;
+
     ul {
       @include Flex(row, 3rem);
       justify-content: space-evenly;
@@ -66,10 +69,17 @@
         @include Size(5.2rem, 2.5rem);
         border-radius: 2rem;
         cursor: pointer;
+        transition: 0.3s ease;
+
+        &:hover {
+          box-shadow: 0px 0px 5px 1px black;
+        }
+        &:active {
+          box-shadow: 0px 0px 5px 2px $color-accent;
+        }
       }
 
       li:nth-child(3) button {
-        // background-color: $color-accent;
         &:hover {
           opacity: 0.75;
         }
@@ -101,7 +111,9 @@
   }
 
   @include MediaQuery($breakpoint-md) {
-    justify-content: space-between;
+    div {
+      margin-left: 1.5rem;
+    }
 
     span {
       display: block;
