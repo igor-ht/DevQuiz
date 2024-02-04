@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 export default function Navbar() {
-	const [menuOpen, setMenuOpen] = useState(false);
+	const [menuOpen, setMenuOpen] = useState(true);
 
 	const handleMenu = () => {
 		setMenuOpen(!menuOpen);
@@ -22,10 +22,14 @@ export default function Navbar() {
 						<Link href={'/categories'}>Categories</Link>
 					</li>
 					<li>
-						<Link href={'/signin'}>Sign In</Link>
+						<Link href={'/signin'}>
+							<button type="button">Sign In</button>
+						</Link>
 					</li>
 					<li>
-						<Link href={'/signup'}>Sign Up</Link>
+						<Link href={'/signup'}>
+							<button type="button">Sign Up</button>
+						</Link>
 					</li>
 				</ul>
 			</nav>
