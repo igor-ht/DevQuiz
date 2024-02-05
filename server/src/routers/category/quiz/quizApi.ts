@@ -23,9 +23,14 @@ export const getAllQuizzes = async (req: Request, res: Response) => {
 
 export const getQuizzById = async (req: Request, res: Response) => {
 	const { categoryId, quizId } = req.params;
-	const quiz = await prisma.category.findUnique({
+	const category = await prisma.category.findUnique({
 		where: {
 			id: categoryId,
+			quiz: {
+				some: {
+					id: +quizId,
+				},
+			},
 		},
 		select: {
 			quiz: {
@@ -36,7 +41,8 @@ export const getQuizzById = async (req: Request, res: Response) => {
 			},
 		},
 	});
-	const quizById = quiz?.quiz.find((quiz) => quiz.id === +quizId);
+
+	const quizById = category?.quiz.find((quiz) => quiz.id === +quizId);
 
 	if (!quizById) res.status(404).json({ message: 'Quiz not found' });
 	res.status(200).json(quizById);
