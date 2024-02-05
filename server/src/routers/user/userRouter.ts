@@ -3,7 +3,7 @@ import { getUserSignin, postUserSignup } from './userApi';
 
 const userRouter = express.Router();
 
-userRouter.get('/signin', getUserSignin);
+userRouter.post('/signin', getUserSignin);
 
 userRouter.post('/signup', postUserSignup);
 

@@ -7,7 +7,7 @@ export const signIn = async (prevState: any, formData: FormData) => {
 	const password = formData.get('password');
 
 	const response = await fetch(`${ENDPOINT}/user/signin`, {
-		method: 'GET',
+		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
 		},

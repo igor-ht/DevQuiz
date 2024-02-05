@@ -5,7 +5,11 @@ import userRouter from './routers/user/userRouter';
 
 const server = express();
 
-server.use(cors());
+server.use(
+	cors({
+		origin: 'http://localhost:3000',
+	})
+);
 
 server.use('/category', categoryRouter);
 

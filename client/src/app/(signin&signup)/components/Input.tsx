@@ -1,5 +1,3 @@
-import { useFormStatus } from 'react-dom';
-
 interface InputProps {
 	name: string;
 	type: string;
@@ -7,8 +5,6 @@ interface InputProps {
 }
 
 export default function Input(props: InputProps) {
-	const { pending, data, method, action } = useFormStatus();
-
 	return (
 		<span>
 			<label htmlFor={props.name}>{props.name.toUpperCase()}</label>
