@@ -1,14 +1,21 @@
 'use server';
 
+import { ENDPOINT } from '@/config';
+
 export const signIn = async (prevState: any, formData: FormData) => {
 	const email = formData.get('email');
 	const password = formData.get('password');
 
-	console.log(email, password);
+	const response = await fetch(`${ENDPOINT}/user/signin`, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({ email, password }),
+	});
 
-	await new Promise((resolve) => setTimeout(resolve, 2000));
-	// handle signin here
-	return { email, password };
+	if (response.status === 401) throw new Error('Invalid email or password');
+	return response.json();
 };
 
 export const signUp = async (prevState: any, formData: FormData) => {
@@ -17,8 +24,17 @@ export const signUp = async (prevState: any, formData: FormData) => {
 	const password = formData.get('password');
 	const confirmPassword = formData.get('confirmPassword');
 
-	console.log(username, email, password, confirmPassword);
+	if (password !== confirmPassword) throw new Error('Passwords do not match');
 
-	// handle signup here
-	return { username, email, password, confirmPassword };
+	const response = await fetch(`${ENDPOINT}/user/signup`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({ username, email, password }),
+	});
+
+	if (response.status === 400) throw new Error('User already exists');
+	if (response.status === 500) throw new Error('Error creating user');
+	return response.json();
 };
