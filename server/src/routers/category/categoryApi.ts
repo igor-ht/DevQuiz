@@ -6,6 +6,12 @@ export const getAllCategories = async (req: Request, res: Response) => {
 		select: {
 			id: true,
 			name: true,
+			quiz: {
+				select: {
+					id: true,
+					name: true,
+				},
+			},
 		},
 	});
 
