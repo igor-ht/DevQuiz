@@ -1,10 +1,10 @@
 import express from 'express';
-import { getUserSignin, postUserSignup } from './userApi';
+import { userSignin, userSignup } from './userApi';
 
 const userRouter = express.Router();
 
-userRouter.post('/signin', getUserSignin);
+userRouter.post('/signin', userSignin);
 
-userRouter.post('/signup', postUserSignup);
+userRouter.post('/signup', userSignup);
 
 export default userRouter;

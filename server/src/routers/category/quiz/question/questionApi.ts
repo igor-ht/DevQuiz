@@ -25,8 +25,8 @@ export const getAllQuestions = async (req: Request, res: Response) => {
 	});
 	const allQuestions = allQuizzes?.quiz.find((quiz) => quiz.id === +quizId)?.questions;
 
-	if (!allQuestions) res.status(404).json({ message: 'Questions not found' });
-	res.status(200).json(allQuestions);
+	if (!allQuestions) return res.status(404).json({ message: 'Questions not found' });
+	return res.status(200).json(allQuestions);
 };
 
 export const getQuestionById = async (req: Request, res: Response) => {
@@ -53,6 +53,6 @@ export const getQuestionById = async (req: Request, res: Response) => {
 	});
 	const question = allQuizzes?.quiz.find((quiz) => quiz.id === +quizId)?.questions.find((question) => question.id === +questionId);
 
-	if (!question) res.status(404).json({ message: 'Question not found' });
-	res.status(200).json(question);
+	if (!question) return res.status(404).json({ message: 'Question not found' });
+	return res.status(200).json(question);
 };

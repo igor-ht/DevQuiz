@@ -15,8 +15,8 @@ export const getAllCategories = async (req: Request, res: Response) => {
 		},
 	});
 
-	if (!categories) res.status(404).json({ message: 'Categories not found' });
-	res.status(200).json(categories);
+	if (!categories) return res.status(404).json({ message: 'Categories not found' });
+	return res.status(200).json(categories);
 };
 
 export const getCategoryById = async (req: Request, res: Response) => {
@@ -31,6 +31,6 @@ export const getCategoryById = async (req: Request, res: Response) => {
 		},
 	});
 
-	if (!category) res.status(404).json({ message: 'Category not found' });
-	res.status(200).json(category);
+	if (!category) return res.status(404).json({ message: 'Category not found' });
+	return res.status(200).json(category);
 };
