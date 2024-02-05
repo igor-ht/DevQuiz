@@ -1,8 +1,9 @@
 import '@/styles/globals.scss';
-import type { Metadata } from 'next';
 import Header from './_layout/Header/Header';
 import Main from './_layout/Main/Main';
+import ReactQueryClientProvider from './(providers)/ReactQueryClientProvider';
 import { FontKarla, FontMerriweather, FontPlusJakarta } from '@/utils/fonts';
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
 	title: 'Dev Quiz 🕹',
@@ -19,7 +20,9 @@ export default function RootLayout({
 		<html lang="en">
 			<body className={`${FontKarla.variable} ${FontPlusJakarta.variable} ${FontMerriweather.variable}`}>
 				<Header />
-				<Main>{children}</Main>
+				<Main>
+					<ReactQueryClientProvider>{children}</ReactQueryClientProvider>
+				</Main>
 			</body>
 		</html>
 	);

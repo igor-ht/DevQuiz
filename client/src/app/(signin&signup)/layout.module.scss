@@ -1,0 +1,67 @@
+@use "@/styles/main" as *;
+
+.formContainer {
+  @include Flex(column);
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  margin-bottom: 3.5rem;
+}
+
+.formCard {
+  @include Flex(column, 1rem);
+  max-width: 95%;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: $color-secondary;
+  box-shadow:
+    0 0 20px 2px $color-accent,
+    0px 0px 2px 1px #4dd8f5,
+    0px 0px 4px 2px white;
+
+  form {
+    @include Flex(column, 1rem);
+    padding: 1rem;
+
+    label {
+      @include Font($font-primary, 1rem, 700, $color-light);
+    }
+
+    input {
+      @include Size(100%, 2.5rem);
+      border: none;
+      margin: 0.2rem 0;
+      border-radius: 0.25rem;
+      background-color: $color-light;
+      font-family: $font-primary;
+      font-size: 1rem;
+      font-weight: 400;
+      color: $color-dark;
+      text-indent: 5px;
+    }
+
+    button {
+      @include Size(100%, 2.5rem);
+      margin-top: 0.5rem;
+      border: none;
+      border-radius: 0.25rem;
+      background-color: $color-primary;
+      font-family: $font-primary;
+      font-size: 1rem;
+      font-weight: 700;
+      color: $color-light;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: $color-accent;
+      }
+
+      &:disabled {
+        background-color: $color-primary;
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+  }
+}

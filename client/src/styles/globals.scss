@@ -3,13 +3,18 @@
 
 // html element
 :root {
+  max-width: 100dvw;
   background-color: $color-dark;
   overflow: hidden;
   overflow-y: auto;
 }
 
 body {
+  @include Flex(column, 0);
+  max-width: 100dvw;
   background-color: $color-dark;
+  overflow: hidden;
+  overflow-y: auto;
 }
 
 .not-found-page,

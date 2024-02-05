@@ -1,5 +1,6 @@
 @use "@/styles/main" as *;
 .main {
+  flex: 1;
   @include Flex(column);
   align-items: center;
 }
