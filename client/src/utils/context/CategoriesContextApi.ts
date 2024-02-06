@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import useCategoryQueryHook from '../hooks/useQueryHooks';
+import { useRouter } from 'next/navigation';
 
 export type State = {
 	id?: string;
@@ -8,12 +9,9 @@ export type State = {
 };
 
 export default function CategoriesContextApi() {
+	const router = useRouter();
 	const [state, setState] = useState<State>({});
-	const { allCategories, status, getCategory, getQuizzFromCategory, getQuestionFromQuizz } = useCategoryQueryHook(
-		state.id,
-		state.quizId,
-		state.questionId
-	);
+	const { allCategories, status, getQuestionFromQuizz } = useCategoryQueryHook(state?.id, state?.quizId, state?.questionId);
 
 	useEffect(() => {
 		if (allCategories) {
@@ -21,5 +19,5 @@ export default function CategoriesContextApi() {
 		}
 	}, [allCategories]);
 
-	return { state, setState, allCategories, status, getCategory, getQuizzFromCategory, getQuestionFromQuizz };
+	return { router, state, setState, allCategories, status, getQuestionFromQuizz };
 }

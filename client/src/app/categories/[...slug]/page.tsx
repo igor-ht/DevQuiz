@@ -1,5 +1,6 @@
 import { ENDPOINT } from '@/config';
-import Timer from './components/Timer/Timer';
+import styles from './page.module.scss';
+import Quiz from './components/Quiz';
 
 export const dynamicParams = false;
 
@@ -21,9 +22,8 @@ export async function generateStaticParams() {
 
 export default function QuizPage({ params }: { params: { slug: string } }) {
 	return (
-		<div>
-			Quiz Page
-			<Timer maxTimeInMinutes={1} />
+		<div className={styles.quizPage}>
+			<Quiz />
 		</div>
 	);
 }

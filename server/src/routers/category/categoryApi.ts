@@ -10,13 +10,22 @@ export const getAllCategories = async (req: Request, res: Response) => {
 				select: {
 					id: true,
 					name: true,
+					questions: {
+						select: {
+							id: true,
+						},
+					},
 				},
 			},
 		},
 	});
 
 	if (!categories) return res.status(404).json({ message: 'Categories not found' });
-	return res.status(200).json(categories);
+	const returnObj = categories.map((category) => ({
+		...category,
+		quiz: category.quiz.map((quiz) => ({ ...quiz, questions: quiz.questions.length })),
+	}));
+	return res.status(200).json(returnObj);
 };
 
 export const getCategoryById = async (req: Request, res: Response) => {

@@ -45,6 +45,7 @@ export const getQuestionById = async (req: Request, res: Response) => {
 						select: {
 							id: true,
 							question: true,
+							options: true,
 						},
 					},
 				},

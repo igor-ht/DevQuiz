@@ -23,9 +23,9 @@ export default function CategoryQuizzes() {
 	return (
 		<div className={styles.quizzes}>
 			<ul>
-				{currentCategory?.quiz.map((quiz: { name: string }) => (
+				{currentCategory?.quiz.map((quiz: { name: string; questions: number }) => (
 					<li key={quiz.name}>
-						<section>{quiz.name}</section> <section>Total Questions: 10</section>{' '}
+						<section>{quiz.name}</section> <section>Total Questions: {quiz.questions}</section>{' '}
 						<Link
 							href={`/categories/${encodeURIComponent(currentCategory.name.toLowerCase())}/${encodeURIComponent(quiz.name.toLowerCase())}`}>
 							<button type="button">Start</button>
