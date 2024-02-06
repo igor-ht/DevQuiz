@@ -15,12 +15,15 @@ export default function SignIn() {
 				type="email"
 				name="email"
 				placeholder="Your email here"
+				label='email'
 			/>
 			<Input
 				type="password"
 				name="password"
 				placeholder="Your password here"
+				label='password'
 			/>
+			{state?.error && <p>{state.error}</p>}
 			<SubmitButton />
 		</Form>
 	);

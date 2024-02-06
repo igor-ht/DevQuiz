@@ -15,22 +15,31 @@ export default function SignUp() {
 				type="text"
 				name="username"
 				placeholder="Your username here"
+				label="username"
 			/>
 			<Input
 				type="email"
 				name="email"
 				placeholder="Your email here"
+				label="email"
 			/>
 			<Input
 				type="password"
 				name="password"
 				placeholder="Your password here"
+				label="password"
 			/>
 			<Input
 				type="password"
 				name="confirmPassword"
 				placeholder="Confirm your password"
+				label="confirm password"
 			/>
+
+			<span>
+				<p style={{ color: state?.error ? 'red' : 'transparent' }}>{state?.error || 'No error'}</p>
+			</span>
+
 			<SubmitButton />
 		</Form>
 	);

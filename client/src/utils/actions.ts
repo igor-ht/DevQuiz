@@ -14,7 +14,7 @@ export const signIn = async (prevState: any, formData: FormData) => {
 		body: JSON.stringify({ email, password }),
 	});
 
-	if (response.status === 401) throw new Error('Invalid email or password');
+	if (response.status === 401) return { error: 'Invalid email or password' };
 	return response.json();
 };
 
@@ -24,7 +24,9 @@ export const signUp = async (prevState: any, formData: FormData) => {
 	const password = formData.get('password');
 	const confirmPassword = formData.get('confirmPassword');
 
-	if (password !== confirmPassword) throw new Error('Passwords do not match');
+	if (username?.toString().length! < 4) return { error: 'Username must be at least 4 characters' };
+	if (password?.toString().length! < 6) return { error: 'Password must be at least 6 characters' };
+	if (password?.toString() !== confirmPassword?.toString()) return { error: 'Confirm password did not match' };
 
 	const response = await fetch(`${ENDPOINT}/user/signup`, {
 		method: 'POST',
@@ -34,7 +36,7 @@ export const signUp = async (prevState: any, formData: FormData) => {
 		body: JSON.stringify({ username, email, password }),
 	});
 
-	if (response.status === 400) throw new Error('User already exists');
-	if (response.status === 500) throw new Error('Error creating user');
+	if (response.status === 400) return { error: 'Email already registered' };
+	if (response.status === 500) return { error: 'Server error' };
 	return response.json();
 };

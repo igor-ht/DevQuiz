@@ -20,7 +20,7 @@
     0px 0px 4px 2px white;
 
   form {
-    @include Flex(column, 1rem);
+    @include Flex(column, 0.5rem);
     padding: 1rem;
 
     label {
@@ -61,6 +61,13 @@
         background-color: $color-primary;
         opacity: 0.5;
         cursor: not-allowed;
+      }
+    }
+
+    span {
+      user-select: none;
+      p {
+        @include Font($font-primary, 1rem, 400, red);
       }
     }
   }
