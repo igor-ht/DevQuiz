@@ -2,7 +2,7 @@
 
 .quiz {
   @include Flex(column, 1rem);
-  @include Grid(1fr, auto auto auto, 1rem);
+  @include Grid(1fr, auto 1fr auto, 1rem);
   min-width: 500px;
   max-width: 95dvw;
   background-color: $color-light;

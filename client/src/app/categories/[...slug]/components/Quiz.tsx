@@ -5,29 +5,32 @@ import { useState, useContext } from 'react';
 import StartQuiz from './StartQuiz/StartQuiz';
 import { CategoriesContext } from '@/utils/context/CategoriesContextProvider';
 import { State } from '@/utils/context/CategoriesContextApi';
+import Loading from '@/app/loading';
 
 export default function Quiz() {
 	const { state, setState, allCategories, getQuestionFromQuizz } = useContext(CategoriesContext);
 	const [quizStatus, setQuizStatus] = useState<'idle' | 'start' | 'stop'>('idle');
-	const [currentAnswer, setCurrentAnswer] = useState('');
-	const [answerChecked, setAnswerChecked] = useState(false);
-	const { data, state: questionState } = getQuestionFromQuizz;
+	const [currentAnswer, setCurrentAnswer] = useState<{ answer: string; status: 'idle' | 'correct' | 'incorrect' }>({
+		answer: '',
+		status: 'idle',
+	});
+	const { data, status: questionState } = getQuestionFromQuizz;
 	const currentQuiz = allCategories
 		?.find((categ: { id: string }) => categ.id === state.id)
 		?.quiz.find((quiz: { id: number }) => quiz.id === state.quizId);
 
 	const handleCheckAnswer = () => {
-		console.log(currentAnswer);
-		setAnswerChecked(true);
+		setCurrentAnswer((prev) => ({ ...prev, status: 'correct' }));
 	};
 
 	const handleNextAnswer = () => {
 		setState((prev: State) => ({ ...prev, questionId: +prev.questionId! + 1 }));
-		setCurrentAnswer('');
-		setAnswerChecked(false);
+		setCurrentAnswer({ answer: '', status: 'idle' });
 	};
 
 	if (quizStatus === 'idle') return <StartQuiz setQuizStatus={setQuizStatus} />;
+
+	if (questionState === 'loading') return <Loading />;
 
 	return (
 		<div className={styles.quiz}>
@@ -40,8 +43,8 @@ export default function Quiz() {
 				{data?.options?.map((option: string, index: number) => (
 					<li
 						key={index}
-						onClick={() => setCurrentAnswer(option)}
-						className={option === currentAnswer ? styles.select : ''}>
+						onClick={() => setCurrentAnswer((prev) => ({ ...prev, answer: option }))}
+						className={option === currentAnswer.answer ? styles.select : ''}>
 						{option}
 					</li>
 				))}
@@ -49,13 +52,13 @@ export default function Quiz() {
 			<section>
 				<button
 					type="button"
-					disabled={!currentAnswer}
+					disabled={currentAnswer.status !== 'idle' || !currentAnswer.answer}
 					onClick={handleCheckAnswer}>
 					Check Answer
 				</button>
 				<button
 					type="button"
-					disabled={!answerChecked}
+					disabled={currentAnswer.status === 'idle'}
 					onClick={handleNextAnswer}>
 					Next Answer
 				</button>

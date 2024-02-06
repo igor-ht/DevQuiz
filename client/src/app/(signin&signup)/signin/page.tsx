@@ -8,22 +8,24 @@ import { signIn } from '@/utils/actions';
 
 export default function SignIn() {
 	const [state, formAction] = useFormState(signIn, { email: '', password: '' });
-	
+
 	return (
 		<Form action={formAction}>
 			<Input
 				type="email"
 				name="email"
 				placeholder="Your email here"
-				label='email'
+				label="email"
 			/>
 			<Input
 				type="password"
 				name="password"
 				placeholder="Your password here"
-				label='password'
+				label="password"
 			/>
-			{state?.error && <p>{state.error}</p>}
+			<span>
+				<p style={{ color: state?.error ? 'red' : 'transparent' }}>{state?.error || 'No error'}</p>
+			</span>
 			<SubmitButton />
 		</Form>
 	);

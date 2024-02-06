@@ -35,11 +35,9 @@ export default function SignUp() {
 				placeholder="Confirm your password"
 				label="confirm password"
 			/>
-
 			<span>
 				<p style={{ color: state?.error ? 'red' : 'transparent' }}>{state?.error || 'No error'}</p>
 			</span>
-
 			<SubmitButton />
 		</Form>
 	);
