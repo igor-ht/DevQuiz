@@ -5,10 +5,10 @@ import Loading from '@/app/loading';
 import CategoryTag from './CategoryTag';
 import { CategoriesContext } from '@/utils/context/CategoriesContextProvider';
 import { useContext } from 'react';
-import { State } from '@/utils/context/CategoriesContextApi';
+import { QueryParams } from '@/utils/context/CategoriesContextApi';
 
 export default function CategoriesTags() {
-	const { state, setState, allCategories, status } = useContext(CategoriesContext);
+	const { queryParams, setQueryParams, allCategories, status } = useContext(CategoriesContext);
 
 	if (status === 'loading') return <Loading />;
 
@@ -18,8 +18,8 @@ export default function CategoriesTags() {
 				{allCategories.map((categ: { id: string; name: string }) => (
 					<CategoryTag
 						key={categ.id}
-						className={state?.id === categ.id ? styles.active : ''}
-						onClick={() => setState((prev: State) => ({ ...prev, id: categ.id }))}>
+						className={queryParams?.id === categ.id ? styles.active : ''}
+						onClick={() => setQueryParams((prev: QueryParams) => ({ ...prev, id: categ.id }))}>
 						{categ.name}
 					</CategoryTag>
 				))}

@@ -1,34 +1,30 @@
 'use client';
 
 import styles from './Quiz.module.scss';
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import StartQuiz from './StartQuiz/StartQuiz';
 import { CategoriesContext } from '@/utils/context/CategoriesContextProvider';
-import { State } from '@/utils/context/CategoriesContextApi';
+import { QueryParams } from '@/utils/context/CategoriesContextApi';
 import Loading from '@/app/loading';
 
 export default function Quiz() {
-	const { state, setState, allCategories, getQuestionFromQuizz } = useContext(CategoriesContext);
-	const [quizStatus, setQuizStatus] = useState<'idle' | 'start' | 'stop'>('idle');
-	const [currentAnswer, setCurrentAnswer] = useState<{ answer: string; status: 'idle' | 'correct' | 'incorrect' }>({
-		answer: '',
-		status: 'idle',
-	});
+	const { state, stateDispatch, queryParams, setQueryParams, allCategories, getQuestionFromQuizz } = useContext(CategoriesContext);
+
 	const { data, status: questionState } = getQuestionFromQuizz;
 	const currentQuiz = allCategories
-		?.find((categ: { id: string }) => categ.id === state.id)
-		?.quiz.find((quiz: { id: number }) => quiz.id === state.quizId);
+		?.find((categ: { id: string }) => categ.id === queryParams?.id)
+		?.quiz.find((quiz: { id: number }) => quiz.id === queryParams?.quizId);
 
 	const handleCheckAnswer = () => {
-		setCurrentAnswer((prev) => ({ ...prev, status: 'correct' }));
+		stateDispatch({ type: 'SET_CURRENT_ANSWER_STATUS', payload: 'correct' });
 	};
 
 	const handleNextAnswer = () => {
-		setState((prev: State) => ({ ...prev, questionId: +prev.questionId! + 1 }));
-		setCurrentAnswer({ answer: '', status: 'idle' });
+		stateDispatch({ type: 'RESET_CURRENT_ANSWER' });
+		setQueryParams((prev: QueryParams) => ({ ...prev, questionId: +prev.questionId! + 1 }));
 	};
 
-	if (quizStatus === 'idle') return <StartQuiz setQuizStatus={setQuizStatus} />;
+	if (state.quizStatus === 'idle') return <StartQuiz />;
 
 	if (questionState === 'loading') return <Loading />;
 
@@ -40,11 +36,11 @@ export default function Quiz() {
 				{data?.question}
 			</h1>
 			<ul>
-				{data?.options?.map((option: string, index: number) => (
+				{data?.options?.map((option: string) => (
 					<li
-						key={index}
-						onClick={() => setCurrentAnswer((prev) => ({ ...prev, answer: option }))}
-						className={option === currentAnswer.answer ? styles.select : ''}>
+						key={option}
+						onClick={() => stateDispatch({ type: 'SET_CURRENT_ANSWER', payload: option })}
+						className={option === state.currentAnswer.answer ? styles.select : ''}>
 						{option}
 					</li>
 				))}
@@ -52,13 +48,13 @@ export default function Quiz() {
 			<section>
 				<button
 					type="button"
-					disabled={currentAnswer.status !== 'idle' || !currentAnswer.answer}
+					disabled={state.currentAnswer.status !== 'idle' || !state.currentAnswer.answer}
 					onClick={handleCheckAnswer}>
 					Check Answer
 				</button>
 				<button
 					type="button"
-					disabled={currentAnswer.status === 'idle'}
+					disabled={state.currentAnswer.status === 'idle'}
 					onClick={handleNextAnswer}>
 					Next Answer
 				</button>

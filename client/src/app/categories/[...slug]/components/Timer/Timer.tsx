@@ -11,7 +11,7 @@ export default function Timer(props: TimerProps) {
 
 	useEffect(() => {
 		if (+timer.split(':')[0] >= props.maxTimeInMinutes) return alert('Time is up!');
-    
+
 		const interval = setInterval(() => {
 			const time = timer.split(':');
 			let minutes = +time[0];
@@ -38,7 +38,7 @@ export default function Timer(props: TimerProps) {
 
 	return (
 		<div>
-			<h1>Timer</h1>
+			<p>⏲</p>
 			<p>{timer}</p>
 		</div>
 	);

@@ -6,8 +6,8 @@ import { CategoriesContext } from '@/utils/context/CategoriesContextProvider';
 import { useContext } from 'react';
 
 export default function CategoryQuizzes() {
-	const { allCategories, state } = useContext(CategoriesContext);
-	const currentCategory = allCategories?.find((categ: { id: string }) => categ?.id === state?.id);
+	const { allCategories, queryParams } = useContext(CategoriesContext);
+	const currentCategory = allCategories?.find((categ: { id: string }) => categ?.id === queryParams?.id);
 
 	if (!allCategories) return <></>;
 

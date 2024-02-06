@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import useCategoryQueryHook from '../hooks/useQueryHooks';
 import { useRouter } from 'next/navigation';
+import { reducer, initialState } from './reducer';
 
-export type State = {
+export type QueryParams = {
 	id?: string;
 	quizId?: string;
 	questionId?: string;
@@ -10,14 +11,20 @@ export type State = {
 
 export default function CategoriesContextApi() {
 	const router = useRouter();
-	const [state, setState] = useState<State>({});
-	const { allCategories, status, getQuestionFromQuizz } = useCategoryQueryHook(state?.id, state?.quizId, state?.questionId);
+	const [state, stateDispatch] = useReducer(reducer, initialState);
+	const [queryParams, setQueryParams] = useState<QueryParams>({});
+
+	const { allCategories, status, getQuestionFromQuizz } = useCategoryQueryHook(
+		queryParams?.id,
+		queryParams?.quizId,
+		queryParams?.questionId
+	);
 
 	useEffect(() => {
 		if (allCategories) {
-			setState((prev) => ({ ...prev, id: allCategories[0].id }));
+			setQueryParams((prev) => ({ ...prev, id: allCategories[0].id }));
 		}
 	}, [allCategories]);
 
-	return { router, state, setState, allCategories, status, getQuestionFromQuizz };
+	return { router, state, stateDispatch, queryParams, setQueryParams, allCategories, status, getQuestionFromQuizz };
 }
