@@ -1,9 +1,27 @@
 import { ENDPOINT } from '@/config';
 import { useQuery } from 'react-query';
 
-const useCategoryQueryHook = (id: string, quizId?: string, questionId?: string) => {
+const useCategoryQueryHook = (id?: string, quizId?: string, questionId?: string) => {
+	const { data: allCategories, status } = useQuery({
+		queryKey: 'categories',
+		cacheTime: Infinity,
+		staleTime: Infinity,
+		retry: 3,
+		queryFn: async () => {
+			try {
+				const response = await fetch(`${ENDPOINT}/category`);
+
+				if (!response.ok) throw new Error('Error fetching categories');
+				return response.json();
+			} catch (error) {
+				throw new Error('Error fetching categories');
+			}
+		},
+	});
+
 	const getCategory = useQuery({
 		queryKey: ['category', id],
+		enabled: !!id,
 		queryFn: async () => {
 			try {
 				const response = await fetch(`${ENDPOINT}/category/${id}`);
@@ -18,6 +36,7 @@ const useCategoryQueryHook = (id: string, quizId?: string, questionId?: string) 
 
 	const getQuizzFromCategory = useQuery({
 		queryKey: ['category', id, 'quiz', quizId],
+		enabled: !!id && !!quizId,
 		queryFn: async () => {
 			try {
 				if (!quizId) throw new Error('Missing quizId');
@@ -34,6 +53,7 @@ const useCategoryQueryHook = (id: string, quizId?: string, questionId?: string) 
 
 	const getQuestionFromQuizz = useQuery({
 		queryKey: ['category', id, 'quiz', quizId, 'question', questionId],
+		enabled: !!id && !!quizId && !!questionId,
 		queryFn: async () => {
 			try {
 				if (!quizId || !questionId) throw new Error('Missing quizId or questionId');
@@ -48,7 +68,7 @@ const useCategoryQueryHook = (id: string, quizId?: string, questionId?: string) 
 		},
 	});
 
-	return { getCategory, getQuizzFromCategory, getQuestionFromQuizz };
+	return { allCategories, status, getCategory, getQuizzFromCategory, getQuestionFromQuizz };
 };
 
 export default useCategoryQueryHook;

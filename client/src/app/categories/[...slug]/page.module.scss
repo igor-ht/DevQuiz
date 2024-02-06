@@ -1,0 +1,11 @@
+@use "@/styles/main" as *;
+
+.quizLayout {
+  position: fixed;
+  height: 100svh;
+  width: 100dvw;
+  background-color: $color-dark;
+  top: 0;
+  color: white;
+  font-size: 2rem;
+}

@@ -2,20 +2,25 @@
 
 .categoriesContainer {
   @include Size(90dvw, auto);
-  @include Grid(1fr, 1fr, 1rem);
+  @include Flex(column, 1rem);
+  min-height: 300px;
   background-color: #1e512875;
   border-radius: 2px;
 
   h1 {
-    @include Font($font-jakarta, 2.5rem, 700, $color-accent);
+    @include Font($font-jakarta, 3rem, 700, $color-accent);
     text-align: center;
     letter-spacing: 1px;
+    user-select: none;
   }
 
   .tagNames {
-    @include Flex(row, 1rem);
-    align-items: center;
+    @include Flex(row, 0.5rem);
+    row-gap: 1rem;
+    flex-wrap: wrap;
     justify-content: space-evenly;
+    margin: 0.5rem 0;
+    user-select: none;
 
     span {
       @include Font($font-primary, 1rem, 700, $color-dark);
@@ -30,20 +35,35 @@
       &:hover {
         background-color: $color-accent;
         color: $color-dark;
+        box-shadow:
+          0px 0px 5px 1px black,
+          0px 0px 10px 1px $color-accent,
+          0px 0px 5px 1px white,
+          0px 0px 10px 1px rgb(130, 251, 255);
       }
+    }
+
+    .active,
+    .active:hover {
+      background-color: $color-primary;
+      color: $color-light;
+      box-shadow:
+        0px 0px 10px 1px $color-accent,
+        0px 0px 5px 1px white,
+        0px 0px 10px 1px rgb(130, 251, 255);
+      cursor: default;
     }
   }
 
   .quizzes {
     ul {
-      @include Flex(column);
+      @include Flex(column, 1rem);
       align-items: center;
       justify-content: space-evenly;
       padding: 1rem;
 
       li {
-        @include Size(20rem, 20rem);
-        @include Image(100%, 100%);
+        @include Size(100%, 100%);
         @include Flex(row, 0);
         align-items: center;
         justify-content: space-between;
@@ -76,6 +96,34 @@
           &:hover {
             background-color: $color-accent;
             color: $color-dark;
+          }
+        }
+      }
+    }
+  }
+
+  @include MediaQuery($breakpoint-md) {
+    width: 95dvw;
+    min-height: 450px;
+
+    .quizzes {
+      ul {
+        padding: 0.5rem;
+
+        li {
+          padding: 0.2rem;
+
+          section {
+            font-size: 1rem;
+            text-wrap: nowrap;
+
+            &:nth-child(2) {
+              margin: 0 2rem;
+            }
+          }
+
+          button {
+            width: 3.5rem;
           }
         }
       }
