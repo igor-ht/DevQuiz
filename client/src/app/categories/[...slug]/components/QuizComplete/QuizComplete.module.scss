@@ -1,0 +1,66 @@
+@use "@/styles/main" as *;
+
+.quizComplete {
+  @include Flex(column, 1rem);
+  align-items: center;
+  background-color: $color-light;
+  padding: 1rem;
+  border-radius: 2px;
+
+  h1 {
+    @include Font($font-primary, 2.2rem, 500, $color-dark);
+
+    span {
+      font-size: 2.5rem;
+      color: $color-primary;
+    }
+  }
+
+  div {
+    width: 100%;
+    flex: 1;
+    section {
+      margin: auto;
+      width: 95%;
+      @include Flex(row, 1rem);
+      align-items: center;
+      justify-content: space-between;
+
+      p {
+        @include Font($font-primary, 1.5rem, 400, $color-dark);
+      }
+    }
+  }
+
+  section {
+    width: 100%;
+    @include Flex(row, 1rem);
+    align-items: center;
+    justify-content: space-between;
+    button:first-child {
+      @include Font($font-secondary, 1rem, 500, $color-primary);
+      text-wrap: nowrap;
+      background-color: transparent;
+      border: 0;
+      box-shadow: 0;
+
+      &:hover {
+        color: $color-secondary;
+        text-decoration: underline;
+      }
+    }
+    button:last-child {
+      @include Font($font-primary, 1.5rem, 500, $color-dark);
+      background-color: $color-secondary;
+      padding: 0.5rem 1rem;
+      box-shadow: 0 0 5px 1px $color-dark;
+
+      &:hover {
+        background-color: $color-primary;
+      }
+      &:active {
+        box-shadow: 0 0 10px 2px $color-dark;
+      }
+    }
+  }
+}

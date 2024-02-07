@@ -12,16 +12,17 @@ export default function Buttons() {
 	};
 
 	const handleNextAnswer = () => {
-		const isLastQuestion = currentQuiz?.questions === currentQuestion?.id;
-
+		if (state.currentAnswer.status === 'correct') stateDispatch({ type: 'INCREMENT_CORRECT_ANSWERS' });
 		stateDispatch({ type: 'RESET_CURRENT_ANSWER' });
+
+		const isLastQuestion = currentQuiz?.questions === currentQuestion?.id;
+		if (isLastQuestion) stateDispatch({ type: 'SET_QUIZ_STATUS', payload: 'completed' });
+		
 		setQueryParams((prev: QueryParams) => ({
 			...prev,
 			questionId: isLastQuestion ? 0 : prev.questionId + 1,
 			answer: '',
 		}));
-
-		if (isLastQuestion) stateDispatch({ type: 'SET_QUIZ_STATUS', payload: 'completed' });
 	};
 	return (
 		<section>
