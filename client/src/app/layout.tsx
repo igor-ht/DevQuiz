@@ -4,6 +4,8 @@ import Main from './_layout/Main/Main';
 import ReactQueryClientProvider from './(providers)/ReactQueryClientProvider';
 import { FontKarla, FontMerriweather, FontPlusJakarta } from '@/utils/fonts';
 import type { Metadata } from 'next';
+import NextAuthProvider from './(providers)/NextAuthProvider';
+import { Session } from 'next-auth';
 
 export const metadata: Metadata = {
 	title: 'Dev Quiz 🕹',
@@ -13,16 +15,20 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
 	children,
+	session,
 }: Readonly<{
 	children: React.ReactNode;
+	session: Session;
 }>) {
 	return (
 		<html lang="en">
 			<body className={`${FontKarla.variable} ${FontPlusJakarta.variable} ${FontMerriweather.variable}`}>
-				<Header />
-				<Main>
-					<ReactQueryClientProvider>{children}</ReactQueryClientProvider>
-				</Main>
+				<NextAuthProvider session={session}>
+					<Header />
+					<Main>
+						<ReactQueryClientProvider>{children}</ReactQueryClientProvider>
+					</Main>
+				</NextAuthProvider>
 			</body>
 		</html>
 	);

@@ -2,9 +2,9 @@
 
 import { ENDPOINT } from '@/config';
 
-export const signIn = async (prevState: any, formData: FormData) => {
-	const email = formData.get('email');
-	const password = formData.get('password');
+export const handleSignIn = async (prevState: any, formData: FormData) => {
+	const email = formData.get('email')?.toString();
+	const password = formData.get('password')?.toString();
 
 	const response = await fetch(`${ENDPOINT}/user/signin`, {
 		method: 'POST',
@@ -14,8 +14,10 @@ export const signIn = async (prevState: any, formData: FormData) => {
 		body: JSON.stringify({ email, password }),
 	});
 
-	if (response.status === 401) return { error: 'Invalid email or password' };
-	return response.json();
+	if (!response?.ok) return { error: 'Invalid email or password' };
+	const user = await response.json();
+	console.log(user);
+	return user;
 };
 
 export const signUp = async (prevState: any, formData: FormData) => {

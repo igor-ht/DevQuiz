@@ -1,13 +1,18 @@
 'use client';
 
+import { handleSignIn } from '@/utils/actions';
 import Form from '../components/Form';
 import Input from '../components/Input';
 import SubmitButton from '../components/SubmitButton';
 import { useFormState } from 'react-dom';
-import { signIn } from '@/utils/actions';
+import { useRouter } from 'next/navigation';
+import { signIn } from 'next-auth/react';
 
 export default function SignIn() {
-	const [state, formAction] = useFormState(signIn, { email: '', password: '' });
+	// const router = useRouter();
+	const [state, formAction] = useFormState(handleSignIn, { email: '', password: '' });
+
+	if (state?.id && state?.email && state?.username && state?.role) signIn('credentials', { ...state, redirect: false });
 
 	return (
 		<Form action={formAction}>
