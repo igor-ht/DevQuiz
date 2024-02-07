@@ -9,16 +9,17 @@ export default function QuizComplete() {
 	const { router, state, stateDispatch, timer, setTimer, currentQuiz, setQueryParams } = useContext(CategoriesContext);
 
 	const handleTryAgain = () => {
-		setTimer('00:00:00');
 		stateDispatch({ type: 'RESET_STATE' });
 		stateDispatch({ type: 'SET_QUIZ_STATUS', payload: 'progress' });
+		setTimer('00:00:00');
 		setQueryParams((prev: State) => ({ ...prev, questionId: 1 }));
 	};
 
 	const handleBackToCategories = () => {
-		setTimer('00:00:00');
-		stateDispatch({ type: 'RESET_STATE' });
 		router.push('/categories');
+		stateDispatch({ type: 'RESET_STATE' });
+		setTimer('00:00:00');
+		setQueryParams((prev: State) => ({ ...prev, quizId: 0, questionId: 0 }));
 	};
 
 	return (
