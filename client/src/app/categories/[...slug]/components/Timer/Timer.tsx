@@ -1,16 +1,20 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import styles from './Timer.module.scss';
+import { useContext, useEffect } from 'react';
+import { CategoriesContext } from '@/utils/context/CategoriesContextProvider';
 
 interface TimerProps {
 	maxTimeInMinutes: number;
 }
 
 export default function Timer(props: TimerProps) {
-	const [timer, setTimer] = useState('00:00:00');
+	const { state, timer, setTimer, stateDispatch } = useContext(CategoriesContext);
 
 	useEffect(() => {
-		if (+timer.split(':')[0] >= props.maxTimeInMinutes) return alert('Time is up!');
+		if (state.quizStatus === 'stop' || state.quizStatus === 'completed') return;
+
+		if (+timer.split(':')[0] >= props.maxTimeInMinutes) return stateDispatch({ type: 'SET_QUIZ_STATUS', payload: 'completed' });
 
 		const interval = setInterval(() => {
 			const time = timer.split(':');
@@ -31,15 +35,17 @@ export default function Timer(props: TimerProps) {
 			}
 
 			setTimer(`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}:${milliseconds.toString().padStart(2, '0')}`);
-		}, 5);
+		}, 8);
 
 		return () => clearInterval(interval);
 	}, [timer]);
 
 	return (
-		<div>
-			<p>⏲</p>
-			<p>{timer}</p>
+		<div className={styles.timer}>
+			<span>
+				<p>⏲</p>
+				<p>{timer}</p>
+			</span>
 		</div>
 	);
 }

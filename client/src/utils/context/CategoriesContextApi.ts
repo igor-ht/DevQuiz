@@ -12,7 +12,7 @@ export type QueryParams = {
 
 export default function CategoriesContextApi() {
 	const router = useRouter();
-	const { state, stateDispatch, queryParams, setQueryParams } = useStateHook();
+	const { state, stateDispatch, queryParams, setQueryParams, timer, setTimer } = useStateHook();
 	const { getAllCategories, getQuestionFromQuizz, getQuestionAnswer } = useCategoryQueryHook(
 		queryParams.id,
 		queryParams.quizId,
@@ -48,6 +48,8 @@ export default function CategoriesContextApi() {
 		stateDispatch,
 		queryParams,
 		setQueryParams,
+		timer,
+		setTimer,
 		allCategories,
 		allCategoriesStatus,
 		currentQuiz,

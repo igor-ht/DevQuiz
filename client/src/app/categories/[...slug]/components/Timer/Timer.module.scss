@@ -1,0 +1,16 @@
+@use "@/styles/main" as *;
+
+.timer {
+  @include Flex(row, 1rem);
+  position: fixed;
+  top: 10px;
+  @include Font($font-primary, 1.8rem, 700, $color-light);
+
+  span {
+    @include Grid(auto auto, 1fr, 0.5rem);
+
+    p:last-child {
+      width: 115px;
+    }
+  }
+}

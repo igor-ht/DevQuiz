@@ -6,15 +6,17 @@ import { State } from '@/utils/hooks/reducer';
 import { useContext } from 'react';
 
 export default function QuizComplete() {
-	const { router, state, stateDispatch, currentQuiz, setQueryParams } = useContext(CategoriesContext);
+	const { router, state, stateDispatch, timer, setTimer, currentQuiz, setQueryParams } = useContext(CategoriesContext);
 
 	const handleTryAgain = () => {
+		setTimer('00:00:00');
 		stateDispatch({ type: 'RESET_STATE' });
 		stateDispatch({ type: 'SET_QUIZ_STATUS', payload: 'progress' });
 		setQueryParams((prev: State) => ({ ...prev, questionId: 1 }));
 	};
 
 	const handleBackToCategories = () => {
+		setTimer('00:00:00');
 		stateDispatch({ type: 'RESET_STATE' });
 		router.push('/categories');
 	};
@@ -35,7 +37,7 @@ export default function QuizComplete() {
 				</section>
 				<section>
 					<p>Timer:</p>
-					<p>01:42 min</p>
+					<p>{timer}</p>
 				</section>
 			</div>
 			<section>

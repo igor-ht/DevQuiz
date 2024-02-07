@@ -25,7 +25,7 @@ export default function StartQuiz() {
 			</span>
 			<span>
 				<p>Total Time:</p>
-				<p>{Math.round(currentQuiz?.questions * 0.3)} min</p>
+				<p>{Math.round(currentQuiz?.questions * 0.45)} min</p>
 			</span>
 
 			<section>
