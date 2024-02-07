@@ -57,3 +57,33 @@ export const getQuestionById = async (req: Request, res: Response) => {
 	if (!question) return res.status(404).json({ message: 'Question not found' });
 	return res.status(200).json(question);
 };
+
+export const getQuestionAnswer = async (req: Request, res: Response) => {
+	const { categoryId, quizId, questionId } = req.params;
+
+	const allQuizzes = await prisma.category.findFirst({
+		where: {
+			id: categoryId,
+		},
+		select: {
+			name: true,
+			quiz: {
+				select: {
+					id: true,
+					questions: {
+						select: {
+							id: true,
+							answer: true,
+						},
+					},
+				},
+			},
+		},
+	});
+
+	if (!allQuizzes) return res.status(404).json({ message: 'Category not found' });
+
+	const answer = allQuizzes?.quiz.find((quiz) => quiz.id === +quizId)?.questions.find((question) => question.id === +questionId);
+	if (!answer) return res.status(404).json({ message: 'Answer not found' });
+	return res.status(200).json(answer);
+};

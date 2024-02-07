@@ -1,6 +1,6 @@
 import { ENDPOINT } from '@/config';
 import styles from './page.module.scss';
-import Quiz from './components/Quiz';
+import Quiz from './components/Quiz/Quiz';
 
 export const dynamicParams = false;
 

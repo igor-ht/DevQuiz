@@ -1,24 +1,28 @@
-import { useEffect, useReducer, useState } from 'react';
-import useCategoryQueryHook from '../hooks/useQueryHooks';
+import { useEffect } from 'react';
+import useCategoryQueryHook from '../hooks/useQueryHook';
 import { useRouter } from 'next/navigation';
-import { reducer, initialState } from './reducer';
+import useStateHook from '../hooks/useStateHook';
 
 export type QueryParams = {
 	id?: string;
 	quizId?: string;
 	questionId?: string;
+	answer?: string;
 };
 
 export default function CategoriesContextApi() {
 	const router = useRouter();
-	const [state, stateDispatch] = useReducer(reducer, initialState);
-	const [queryParams, setQueryParams] = useState<QueryParams>({});
-
-	const { allCategories, status, getQuestionFromQuizz } = useCategoryQueryHook(
+	const { state, stateDispatch, queryParams, setQueryParams } = useStateHook();
+	const { getAllCategories, getQuestionFromQuizz, getQuestionAnswer } = useCategoryQueryHook(
 		queryParams?.id,
 		queryParams?.quizId,
-		queryParams?.questionId
+		queryParams?.questionId,
+		queryParams.answer
 	);
+
+	const { data: allCategories, status: allCategoriesStatus } = getAllCategories;
+	const { data: currentQuestion, status: currentQuestionStatus } = getQuestionFromQuizz;
+	const { data: currentQuestionAnswer, status: currentQuestionAnswerStatus } = getQuestionAnswer;
 
 	useEffect(() => {
 		if (allCategories) {
@@ -26,5 +30,25 @@ export default function CategoriesContextApi() {
 		}
 	}, [allCategories]);
 
-	return { router, state, stateDispatch, queryParams, setQueryParams, allCategories, status, getQuestionFromQuizz };
+	useEffect(() => {
+		if (state.currentAnswer.answer && currentQuestionAnswer)
+			stateDispatch({
+				type: 'SET_CURRENT_ANSWER_STATUS',
+				payload: currentQuestionAnswer?.answer === state.currentAnswer.answer ? 'correct' : 'incorrect',
+			});
+	}, [currentQuestionAnswer]);
+
+	return {
+		router,
+		state,
+		stateDispatch,
+		queryParams,
+		setQueryParams,
+		allCategories,
+		allCategoriesStatus,
+		currentQuestion,
+		currentQuestionStatus,
+		currentQuestionAnswer,
+		currentQuestionAnswerStatus,
+	};
 }

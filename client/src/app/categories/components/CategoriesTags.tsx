@@ -8,11 +8,11 @@ import { useContext } from 'react';
 import { QueryParams } from '@/utils/context/CategoriesContextApi';
 
 export default function CategoriesTags() {
-	const { queryParams, setQueryParams, allCategories, status } = useContext(CategoriesContext);
+	const { queryParams, setQueryParams, allCategories, allCategoriesStatus } = useContext(CategoriesContext);
 
-	if (status === 'loading') return <Loading />;
+	if (allCategoriesStatus === 'loading') return <Loading />;
 
-	if (status === 'success' && allCategories)
+	if (allCategoriesStatus === 'success' && allCategories)
 		return (
 			<div className={styles.tagNames}>
 				{allCategories.map((categ: { id: string; name: string }) => (

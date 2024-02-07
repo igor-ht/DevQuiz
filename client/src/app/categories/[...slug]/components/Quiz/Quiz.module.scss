@@ -37,9 +37,27 @@
       }
     }
     .select {
-      background-color: rgb(216, 216, 231);
+      background-color: rgb(216, 216, 231) !important;
       color: $color-dark;
       box-shadow: 0px 0px 5px 0px $color-dark;
+    }
+    .disabled,
+    .correct,
+    .incorrect {
+      color: $color-dark;
+      box-shadow: 0px 0px 5px 0px $color-dark;
+      cursor: not-allowed;
+    }
+    .correct {
+      background-color: rgb(0, 255, 0, 0.5) !important;
+    }
+    .incorrect {
+      background-color: rgb(255, 0, 0, 0.5) !important;
+    }
+    .disabled {
+      background-color: #788160 !important;
+      box-shadow: none !important;
+      opacity: 0.5;
     }
   }
 
