@@ -1,28 +1,32 @@
 import { useEffect } from 'react';
-import useCategoryQueryHook from '../hooks/useQueryHook';
 import { useRouter } from 'next/navigation';
+import useCategoryQueryHook from '../hooks/useQueryHook';
 import useStateHook from '../hooks/useStateHook';
 
 export type QueryParams = {
-	id?: string;
-	quizId?: string;
-	questionId?: string;
-	answer?: string;
+	id: string;
+	quizId: number;
+	questionId: number;
+	answer: string;
 };
 
 export default function CategoriesContextApi() {
 	const router = useRouter();
 	const { state, stateDispatch, queryParams, setQueryParams } = useStateHook();
 	const { getAllCategories, getQuestionFromQuizz, getQuestionAnswer } = useCategoryQueryHook(
-		queryParams?.id,
-		queryParams?.quizId,
-		queryParams?.questionId,
+		queryParams.id,
+		queryParams.quizId,
+		queryParams.questionId,
 		queryParams.answer
 	);
 
 	const { data: allCategories, status: allCategoriesStatus } = getAllCategories;
 	const { data: currentQuestion, status: currentQuestionStatus } = getQuestionFromQuizz;
 	const { data: currentQuestionAnswer, status: currentQuestionAnswerStatus } = getQuestionAnswer;
+
+	const currentQuiz = allCategories
+		?.find((categ: { id: string }) => categ.id === queryParams?.id)
+		?.quiz.find((quiz: { id: number }) => quiz.id === queryParams?.quizId);
 
 	useEffect(() => {
 		if (allCategories) {
@@ -46,6 +50,7 @@ export default function CategoriesContextApi() {
 		setQueryParams,
 		allCategories,
 		allCategoriesStatus,
+		currentQuiz,
 		currentQuestion,
 		currentQuestionStatus,
 		currentQuestionAnswer,

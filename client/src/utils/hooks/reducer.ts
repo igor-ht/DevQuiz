@@ -1,11 +1,11 @@
 export type State = {
-	quizStatus: 'idle' | 'start' | 'stop';
+	quizStatus: 'idle' | 'progress' | 'stop' | 'completed';
 	currentAnswer: { answer: string; status: 'idle' | 'correct' | 'incorrect' };
 };
 type Action =
 	| {
 			type: 'SET_QUIZ_STATUS';
-			payload: 'idle' | 'start' | 'stop';
+			payload: 'idle' | 'progress' | 'stop' | 'completed';
 	  }
 	| {
 			type: 'SET_CURRENT_ANSWER';

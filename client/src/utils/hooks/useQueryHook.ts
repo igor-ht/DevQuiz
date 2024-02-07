@@ -1,7 +1,7 @@
 import { ENDPOINT } from '@/config';
 import { useQuery } from 'react-query';
 
-const useCategoryQueryHook = (id?: string, quizId?: string, questionId?: string, answer?: string) => {
+const useCategoryQueryHook = (id: string, quizId: number, questionId: number, answer?: string) => {
 	const getAllCategories = useQuery({
 		queryKey: ['categories'],
 		retry: 3,

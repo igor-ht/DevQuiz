@@ -1,6 +1,6 @@
 import { ENDPOINT } from '@/config';
 import styles from './page.module.scss';
-import Quiz from './components/Quiz/Quiz';
+import QuizPage from './components/QuizPage';
 
 export const dynamicParams = false;
 
@@ -20,10 +20,10 @@ export async function generateStaticParams() {
 	return paths.flat();
 }
 
-export default function QuizPage({ params }: { params: { slug: string } }) {
+export default function Page({ params }: { params: { slug: string } }) {
 	return (
 		<div className={styles.quizPage}>
-			<Quiz />
+			<QuizPage />
 		</div>
 	);
 }
