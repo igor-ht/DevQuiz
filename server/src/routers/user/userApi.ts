@@ -29,7 +29,8 @@ export async function userSignup(req: Request, res: Response) {
 			],
 		},
 	});
-	if (hasUser) return res.status(400).json({ message: 'User already exists' });
+	if (hasUser?.email === email) return res.status(400).json({ message: 'Email already registered' });
+	if (hasUser?.userName === username) return res.status(400).json({ message: 'Username already registered' });
 
 	const newUser = await prisma.user.create({
 		data: {

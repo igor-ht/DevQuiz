@@ -5,14 +5,13 @@ import Form from '../components/Form';
 import Input from '../components/Input';
 import SubmitButton from '../components/SubmitButton';
 import { useFormState } from 'react-dom';
-import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 
 export default function SignIn() {
-	// const router = useRouter();
 	const [state, formAction] = useFormState(handleSignIn, { email: '', password: '' });
 
-	if (state?.id && state?.email && state?.username && state?.role) signIn('credentials', { ...state, redirect: false });
+	const hasUser = state?.id && state?.email && state?.username && state?.role;
+	if (hasUser) signIn('credentials', { ...state, callbackUrl: '/dashboard' });
 
 	return (
 		<Form action={formAction}>

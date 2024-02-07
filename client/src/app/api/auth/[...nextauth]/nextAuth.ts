@@ -25,12 +25,13 @@ export const NextAuthOptions: AuthOptions = {
 		},
 		session: async ({ session, token }) => {
 			return {
-				id: token.id,
-				username: token.username,
-				email: token.email,
-				role: token.role,
 				expires: session.expires,
-				user: session.user,
+				user: {
+					id: token.id,
+					username: token.username,
+					email: token.email,
+					role: token.role,
+				},
 			};
 		},
 	},

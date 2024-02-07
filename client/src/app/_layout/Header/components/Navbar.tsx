@@ -3,8 +3,10 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
+import { signOut, useSession } from 'next-auth/react';
 
 export default function Navbar() {
+	const { status } = useSession();
 	const [menuOpen, setMenuOpen] = useState(false);
 
 	useEffect(() => {
@@ -29,16 +31,38 @@ export default function Navbar() {
 					<li>
 						<Link href={'/categories'}>Categories</Link>
 					</li>
-					<li>
-						<Link href={'/signin'}>
-							<button type="button">Sign In</button>
-						</Link>
-					</li>
-					<li>
-						<Link href={'/signup'}>
-							<button type="button">Sign Up</button>
-						</Link>
-					</li>
+					{status !== 'authenticated' ? (
+						<>
+							<li>
+								<Link href={'/signin'}>
+									<button type="button">Sign In</button>
+								</Link>
+							</li>
+							<li>
+								<Link href={'/signup'}>
+									<button type="button">Sign Up</button>
+								</Link>
+							</li>
+						</>
+					) : (
+						<>
+							<li>
+								<Link href={'/dashboard'}>
+									<button type="button">Dashboard</button>
+								</Link>
+							</li>
+							<li>
+								<span style={{ display: 'flex', alignItems: 'center', minHeight: '65px', marginLeft: '0.5rem' }}>
+									<button
+										type="button"
+										style={{ backgroundColor: '#990d0d' }}
+										onClick={() => signOut()}>
+										Sign Out
+									</button>
+								</span>
+							</li>
+						</>
+					)}
 				</ul>
 			</nav>
 			<span>

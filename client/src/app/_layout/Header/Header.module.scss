@@ -4,6 +4,7 @@
   @include Flex(row);
   align-items: center;
   justify-content: space-between;
+  user-select: none;
 
   div {
     display: inline-block;
@@ -66,7 +67,7 @@
       justify-content: space-evenly;
 
       button {
-        @include Size(5.2rem, 2.5rem);
+        @include Size(6rem, 2.5rem);
         border-radius: 2rem;
         cursor: pointer;
         transition: 0.3s ease;
@@ -79,6 +80,20 @@
         }
       }
 
+      li {
+        @include Font(system-ui, 1.1rem, 500, rgb(191, 242, 195));
+        align-self: center;
+        a {
+          @include Font(system-ui, 1.1rem, 500, rgb(191, 242, 195));
+          &:hover {
+            opacity: 0.75;
+          }
+          &:has(button) {
+            width: fit-content;
+            width: -moz-fit-content;
+          }
+        }
+      }
       li:nth-child(3) button {
         &:hover {
           opacity: 0.75;
@@ -88,23 +103,8 @@
         background-color: $color-secondary;
         color: $color-light;
         &:hover {
-          background-color: rgb(99, 255, 99);
+          background-color: rgb(67, 181, 67);
           color: $color-dark;
-        }
-      }
-
-      li {
-        align-self: center;
-        a {
-          @include Font(system-ui, 1.1rem, 500, rgb(191, 242, 195));
-
-          &:hover {
-            opacity: 0.75;
-          }
-          &:has(button) {
-            width: fit-content;
-            width: -moz-fit-content;
-          }
         }
       }
     }

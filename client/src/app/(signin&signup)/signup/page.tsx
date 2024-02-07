@@ -5,9 +5,13 @@ import Input from '../components/Input';
 import SubmitButton from '../components/SubmitButton';
 import { useFormState } from 'react-dom';
 import { signUp } from '@/utils/actions';
+import { signIn } from 'next-auth/react';
 
 export default function SignUp() {
 	const [state, formAction] = useFormState(signUp, { username: '', email: '', password: '', confirmPassword: '' });
+
+	const hasUser = state?.id && state?.email && state?.username && state?.role;
+	if (hasUser) signIn('credentials', { ...state, callbackUrl: '/dashboard' });
 
 	return (
 		<Form action={formAction}>

@@ -16,7 +16,6 @@ export const handleSignIn = async (prevState: any, formData: FormData) => {
 
 	if (!response?.ok) return { error: 'Invalid email or password' };
 	const user = await response.json();
-	console.log(user);
 	return user;
 };
 
@@ -38,7 +37,7 @@ export const signUp = async (prevState: any, formData: FormData) => {
 		body: JSON.stringify({ username, email, password }),
 	});
 
-	if (response.status === 400) return { error: 'Email already registered' };
+	if (response.status === 400) return { error: (await response.json()).message };
 	if (response.status === 500) return { error: 'Server error' };
-	return response.json();
+	return await response.json();
 };
