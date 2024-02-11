@@ -29,6 +29,7 @@ export default function CategoryQuizzes() {
 
 	return (
 		<div className={styles.quizzes}>
+			<h2>{currentCategory?.name}</h2>
 			<ul>
 				{currentCategory?.quiz.map((quiz: { id: string; name: string; questions: number }) => (
 					<li key={quiz.name}>

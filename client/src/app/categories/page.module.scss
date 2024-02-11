@@ -8,56 +8,83 @@
   border-radius: 2px;
 
   h1 {
-    @include Font($font-jakarta, 3rem, 700, $color-accent);
+    @include Font($font-jakarta, 3rem, 700, $color-light);
     text-align: center;
     letter-spacing: 1px;
     user-select: none;
   }
 
   .tagNames {
-    @include Flex(row, 0.5rem);
-    row-gap: 1rem;
+    @include Flex(row, 1.5rem);
     flex-wrap: wrap;
-    justify-content: space-evenly;
-    margin: 0.5rem 0;
+    margin: 0.5rem;
     user-select: none;
 
     span {
       @include Font($font-primary, 1rem, 700, $color-dark);
+      text-indent: 20px;
+      line-height: 2rem;
       text-align: center;
-      padding: 0.75rem;
-      border-radius: 2rem;
+      text-wrap: nowrap;
+      position: relative;
+      height: 2.3rem;
+      width: auto;
+      padding: 0.2rem;
+      padding-right: 1.5rem;
       cursor: pointer;
       transition: all 0.3s ease;
-      background-color: $color-light;
-      text-wrap: nowrap;
+      background-color: #5a9b44;
+      border: 0;
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+      border-top-right-radius: 1rem;
 
+      &::before {
+        border-radius: 10px;
+        box-shadow: inset 0 0 20px 20px rgba(255, 255, 255, 0.734);
+        content: "";
+        height: 6px;
+        left: 10px;
+        position: absolute;
+        width: 6px;
+        top: 1rem;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 2.3rem;
+        width: 15px;
+        background: transparent;
+        background-color: transparent;
+        border-bottom: 18px solid #1c3320;
+        border-top: 18px solid #1c3320;
+        border-left: 15px solid transparent;
+      }
       &:hover {
-        background-color: $color-accent;
-        color: $color-dark;
-        box-shadow:
-          0px 0px 5px 1px black,
-          0px 0px 10px 1px $color-accent,
-          0px 0px 5px 1px white,
-          0px 0px 10px 1px rgb(130, 251, 255);
+        background-color: #4a7a3a;
       }
     }
 
     .active,
     .active:hover {
-      background-color: $color-primary;
-      color: $color-light;
-      box-shadow:
-        0px 0px 10px 1px $color-accent,
-        0px 0px 5px 1px white,
-        0px 0px 10px 1px rgb(130, 251, 255);
+      background: #22ab2c;
+      background-color: #22ab2c;
       cursor: default;
     }
   }
 
   .quizzes {
+    h2 {
+      @include Font($font-primary, 2rem, 700, $color-light);
+      text-align: center;
+      margin: 0.5rem 0;
+    }
     ul {
       @include Flex(column, 1rem);
+      text-align: left;
       align-items: center;
       justify-content: space-evenly;
       padding: 1rem;
@@ -106,7 +133,14 @@
     width: 95dvw;
     min-height: 450px;
 
+    h1 {
+      font-size: 2.5rem;
+    }
+
     .quizzes {
+      h2 {
+        font-size: 1.5rem;
+      }
       ul {
         padding: 0.5rem;
 

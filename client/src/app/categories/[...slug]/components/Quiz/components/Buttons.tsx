@@ -17,7 +17,7 @@ export default function Buttons() {
 
 		const isLastQuestion = currentQuiz?.questions === currentQuestion?.id;
 		if (isLastQuestion) stateDispatch({ type: 'SET_QUIZ_STATUS', payload: 'completed' });
-		
+
 		setQueryParams((prev: QueryParams) => ({
 			...prev,
 			questionId: isLastQuestion ? 0 : prev.questionId + 1,

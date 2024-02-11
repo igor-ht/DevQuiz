@@ -67,32 +67,42 @@
     justify-content: space-between;
 
     button {
-      @include Font($font-primary, 1.1rem, 500, $color-light);
-      background-color: $color-secondary;
+      @include Font($font-primary, 1.1rem, 500, white);
+      background-color: rgb(61, 61, 141);
+      border: 1px solid rgb(61, 61, 141);
       padding: 1rem;
       border: none;
       border-radius: 0.5rem;
       cursor: pointer;
       transition: background-color 0.3s;
 
-      &:hover {
-        opacity: 0.8;
+      &:hover:not(:disabled) {
+        background-color: rgb(63, 63, 175);
+        border: 1px solid rgb(63, 63, 175);
         box-shadow: 0px 0px 5px 0px $color-dark;
       }
-      &:active {
+      &:active:not(:disabled) {
+        scale: 1.05;
+        background-color: rgb(75, 75, 227);
+        border: 1px solid rgb(75, 75, 227);
         box-shadow: 0px 0px 5px 1px $color-dark;
       }
 
       &:first-child {
-        background-color: rgb(191, 185, 176);
-        color: $color-dark;
+        background-color: $color-secondary;
+        border: 1px solid $color-secondary;
+        color: white;
 
-        &:hover {
-          background-color: rgb(216, 216, 231);
-          color: $color-dark;
+        &:hover:not(:disabled) {
+          background-color: $color-primary;
+          border: 1px solid $color-primary;
+          color: white;
           box-shadow: 0px 0px 5px 0px $color-dark;
         }
-        &:active {
+        &:active:not(:disabled) {
+          scale: 1.05;
+          background-color: $color-accent;
+          border: 1px solid $color-accent;
           box-shadow: 0px 0px 5px 1px $color-dark;
         }
       }
