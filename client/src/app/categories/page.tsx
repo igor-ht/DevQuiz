@@ -5,7 +5,6 @@ import CategoryQuizzes from './components/CategoryQuizzes';
 export default async function Categories() {
 	return (
 		<div className={styles.categoriesContainer}>
-			<h1>Categories</h1>
 			<CategoriesTags />
 			<CategoryQuizzes />
 		</div>

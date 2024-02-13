@@ -15,14 +15,20 @@ export default function CategoriesTags() {
 	if (allCategoriesStatus === 'success' && allCategories)
 		return (
 			<div className={styles.tagNames}>
-				{allCategories.map((categ: { id: string; name: string }) => (
-					<CategoryTag
-						key={categ.id}
-						className={queryParams?.id === categ.id ? styles.active : ''}
-						onClick={() => setQueryParams((prev: QueryParams) => ({ ...prev, id: categ.id }))}>
-						{categ.name}
-					</CategoryTag>
-				))}
+				<input
+					type="search"
+					placeholder="Search for a category or quiz"
+				/>
+				<section>
+					{allCategories.map((categ: { id: string; name: string }) => (
+						<CategoryTag
+							key={categ.id}
+							className={queryParams?.id === categ.id ? styles.active : ''}
+							onClick={() => setQueryParams((prev: QueryParams) => ({ ...prev, id: categ.id }))}>
+							{categ.name}
+						</CategoryTag>
+					))}
+				</section>
 			</div>
 		);
 }

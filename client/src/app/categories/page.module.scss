@@ -4,75 +4,86 @@
   @include Size(90dvw, auto);
   @include Flex(column, 1rem);
   min-height: 300px;
+  padding: 1rem;
   background-color: #1e512875;
   border-radius: 2px;
 
-  h1 {
-    @include Font($font-jakarta, 3rem, 700, $color-light);
-    text-align: center;
-    letter-spacing: 1px;
-    user-select: none;
-  }
-
   .tagNames {
-    @include Flex(row, 1.5rem);
-    flex-wrap: wrap;
+    @include Flex(column, 1rem);
     margin: 0.5rem;
+    margin-bottom: 0;
     user-select: none;
 
-    span {
-      @include Font($font-primary, 1rem, 700, $color-dark);
-      text-indent: 20px;
-      line-height: 2rem;
-      text-align: center;
-      text-wrap: nowrap;
-      position: relative;
-      height: 2.3rem;
-      width: auto;
-      padding: 0.2rem;
-      padding-right: 1.5rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      background-color: #5a9b44;
-      border: 0;
-      border-top-left-radius: 10px;
-      border-bottom-left-radius: 10px;
-      border-top-right-radius: 1rem;
+    input[type="search"] {
+      @include Font(system-ui, 1rem, 500, black);
+      text-indent: 10px;
+      height: 2.2rem;
+      max-width: 80%;
 
-      &::before {
-        border-radius: 10px;
-        box-shadow: inset 0 0 20px 20px rgba(255, 255, 255, 0.734);
-        content: "";
-        height: 6px;
-        left: 10px;
-        position: absolute;
-        width: 6px;
-        top: 1rem;
-      }
-
-      &::after {
-        content: "";
-        position: absolute;
-        right: 0;
-        top: 0;
-        height: 2.3rem;
-        width: 15px;
-        background: transparent;
-        background-color: transparent;
-        border-bottom: 18px solid #1c3320;
-        border-top: 18px solid #1c3320;
-        border-left: 15px solid transparent;
-      }
-      &:hover {
-        background-color: #4a7a3a;
+      &::placeholder {
+        @include Font(system-ui, 0.8rem, 400, gray);
       }
     }
 
-    .active,
-    .active:hover {
-      background: #22ab2c;
-      background-color: #22ab2c;
-      cursor: default;
+    section {
+      @include Flex(row, 1.5rem);
+      flex-wrap: wrap;
+      margin: 1rem;
+      user-select: none;
+
+      span {
+        @include Font($font-primary, 1rem, 700, $color-dark);
+        text-indent: 5px;
+        line-height: 2.35rem;
+        text-align: center;
+        text-wrap: nowrap;
+        position: relative;
+        height: 2.3rem;
+        width: auto;
+        padding: 0rem 0.5rem 0rem 1.5rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background-color: #5a9b44;
+        border: 0;
+        border-radius: 10px;
+
+        &::before {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 0;
+          height: 2.35rem;
+          width: 15px;
+          background: transparent;
+          background-color: transparent;
+          border-bottom: 18px solid #1c3320;
+          border-top: 18px solid #1c3320;
+          border-left: 15px solid transparent;
+          transform: rotateZ(180deg);
+        }
+
+        &::after {
+          content: "";
+          height: 6px;
+          width: 6px;
+          border-radius: 10px;
+          box-shadow: inset 0 0 20px 20px rgb(255, 255, 255);
+          position: absolute;
+          left: 15px;
+          top: 1rem;
+        }
+
+        &:hover {
+          background-color: #4a7a3a;
+        }
+      }
+
+      .active,
+      .active:hover {
+        background: #22ab2c;
+        background-color: #22ab2c;
+        cursor: default;
+      }
     }
   }
 
@@ -80,7 +91,7 @@
     h2 {
       @include Font($font-primary, 2rem, 700, $color-light);
       text-align: center;
-      margin: 0.5rem 0;
+      margin: 0 0 0.5rem 0;
     }
     ul {
       @include Flex(column, 1rem);
@@ -132,6 +143,10 @@
   @include MediaQuery($breakpoint-md) {
     width: 95dvw;
     min-height: 450px;
+
+    .tagNames {
+      justify-content: space-evenly;
+    }
 
     h1 {
       font-size: 2.5rem;
